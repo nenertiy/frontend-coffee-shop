@@ -24,7 +24,7 @@ const Header: FC = () => {
               Menu
             </NavLink>
             <NavLink
-              to="/category"
+              to="/categories"
               className={styles.item}>
               Category
             </NavLink>

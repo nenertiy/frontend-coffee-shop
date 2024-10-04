@@ -24,7 +24,10 @@
   &::-webkit-scrollbar-thumb {
     background-color: #afafaf;
   }
+  height: calc(100vh - 100px);
+  background: rgb(249, 249, 249);
 }
 .App {
   font-family: "SoDoSans", Helvetica, Arial, sans-serif;
+  height: calc(100vh - 100px);
 }

@@ -10,7 +10,9 @@ const Layout: FC = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <div style={{ height: "calc(100vh - 130px)" }}>
+        <Outlet />
+      </div>
       {isCart && <CartFooter />}
     </>
   );
