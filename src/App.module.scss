@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "SoDoSans";
+  font-weight: 400;
+  src: url(./assets/fonts/SoDoSans-Regular.woff2);
+}
+
+@font-face {
+  font-family: "SoDoSans";
+  font-weight: 700;
+  src: url(./assets/fonts/SoDoSans-Bold.woff2);
+}
+
+@font-face {
+  font-family: "SoDoSans";
+  font-weight: 600;
+  src: url(./assets/fonts/SoDoSans-SemiBold.woff2) format("woff2");
+}
+:root {
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: #cecece;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #afafaf;
+  }
+}
+.App {
+  font-family: "SoDoSans", Helvetica, Arial, sans-serif;
+}
