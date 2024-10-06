@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  > label {
+    font-size: 20px;
+  }
+
+  > select {
+    box-sizing: border-box;
+    margin-top: 10px;
+    width: 420px;
+    height: 44px;
+    border: 1px solid rgba(0, 0, 0, 0.329);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-family: inherit;
+    padding: 0 20px;
+    outline: none;
+    transition: border 0.3s ease;
+
+    &:hover {
+      border: 2px solid rgba(2, 121, 36, 0.692);
+    }
+
+    &:focus {
+      outline: 1px solid rgba(2, 121, 36, 0.692);
+    }
+  }
+
+  > input {
+    box-sizing: border-box;
+    margin-top: 10px;
+    width: 420px;
+    height: 44px;
+    border: 1px solid rgba(0, 0, 0, 0.329);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-family: inherit;
+    padding: 0 20px;
+    outline: none;
+    transition: border 0.3s ease;
+
+    &:hover {
+      border: 2px solid rgba(2, 121, 36, 0.692);
+    }
+
+    &:focus {
+      outline: 1px solid rgba(2, 121, 36, 0.692);
+    }
+  }
+}
+
+.button {
+  padding: 14px 22px;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: 700;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: rgb(0, 133, 0);
+  box-shadow: 0 2px 4px #00000012, 0 4px 5px #0000000f, 0 1px 10px #0000001a;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: rgb(0, 107, 0);
+  }
+
+  &_container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}

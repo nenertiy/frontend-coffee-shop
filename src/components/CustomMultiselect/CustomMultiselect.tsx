@@ -23,7 +23,7 @@ const CustomMultiselect: FC<CustomMultiselectProps> = ({ data, selected, setSele
 
   return (
     <div className={styles.container}>
-      {data.map((subcategory) => (
+      {data?.map((subcategory) => (
         <div
           key={subcategory.id}
           className={styles.item}>

@@ -1,9 +1,9 @@
 import { FC } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import { createSubcategory } from "../../utils/api";
 
 import styles from "./FormSubcategory.module.scss";
-
-import { SubmitHandler, useForm } from "react-hook-form";
-import { createSubcategory } from "../../utils/api";
 
 const FormSubcategory: FC = () => {
   interface SubcategoryFormData {
@@ -13,7 +13,8 @@ const FormSubcategory: FC = () => {
 
   const { register, handleSubmit } = useForm<SubcategoryFormData>();
 
-  const onSubmit: SubmitHandler<SubcategoryFormData> = (data) => createSubcategory(data);
+  const onSubmit: SubmitHandler<SubcategoryFormData> = (data) =>
+    createSubcategory({ name: data.name, img: data.img });
 
   return (
     <div className={styles.container}>
@@ -24,7 +25,7 @@ const FormSubcategory: FC = () => {
         <div className={styles.name}>
           <label htmlFor="name">Name</label>
           <input
-            {...register("name")}
+            {...register("name", { required: true })}
             type="text"
             id="name"
           />
@@ -32,7 +33,7 @@ const FormSubcategory: FC = () => {
         <div className={styles.img}>
           <label htmlFor="image">Image (url)</label>
           <input
-            {...register("img")}
+            {...register("img", { required: true })}
             type="url"
             id="image"
           />

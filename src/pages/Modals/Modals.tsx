@@ -3,6 +3,7 @@ import Modal from "../../components/Modal/Modal";
 import { useCreateStore } from "../../store/createStore";
 import FormSubcategory from "../../components/FormSubcategory/FormSubcategory";
 import FormCategory from "../../components/FormCategory/FormCategory";
+import FormProduct from "../../components/FormProduct/FormProduct";
 
 const Modals: FC = () => {
   const subcategoryOpen = useCreateStore((state) => state.subcategoryOpen);
@@ -29,7 +30,7 @@ const Modals: FC = () => {
       <Modal
         onClose={() => productOpen()}
         isOpen={productIsOpen}>
-        <h2>Product</h2>
+        <FormProduct />
       </Modal>
     </>
   );

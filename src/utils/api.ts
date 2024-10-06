@@ -11,38 +11,71 @@ const apiClient = axios.create({
 });
 
 //Products
-export const fetchProducts = () => {
-  return apiClient.get("/products").then((res) => res.data);
+export const fetchProducts = async () => {
+  // return apiClient.get("/products").then((res) => res.data);
+  try {
+    const response = await apiClient.get("/products");
+    return response.data;
+  } catch {
+    throw new Error("Failed to find products");
+  }
 };
 
-export const fetchProduct = (id: number) => {
-  return apiClient.get(`/products/${id}`).then((res) => res.data);
+export const fetchProduct = async (id: number) => {
+  // return apiClient.get(`/products/${id}`).then((res) => res.data);
+  try {
+    const response = await apiClient.get(`/products?${id}`);
+    return response.data;
+  } catch {
+    throw new Error("Failed to find products");
+  }
+};
+
+export const createProduct = async (data) => {
+  try {
+    const response = await apiClient.post(`/products`, data);
+    return response.data;
+  } catch {
+    throw new Error("Failed to create product");
+  }
 };
 
 //Categories
-export const fetchCategories = () => {
-  return apiClient.get("/categories").then((res) => res.data);
+export const fetchCategories = async () => {
+  // return axios.get("/categories").then((res) => res.data);
+  try {
+    const response = await apiClient.get("/categories");
+    return response.data;
+  } catch {
+    throw new Error("Failed to find categories");
+  }
 };
 
 export const createCategory = async (data: { name: string; subCategoryId: number[] }) => {
   try {
-    const response = await apiClient.post(`${API_URL}/categories`, data);
+    const response = await apiClient.post(`/categories`, data);
     return response.data;
-  } catch (e) {
+  } catch {
     throw new Error("Failed to create subcategory");
   }
 };
 
 //Subcategories
-export const fetchSubcategories = () => {
-  return apiClient.get("/subcategories").then((res) => res.data);
+export const fetchSubcategories = async () => {
+  // return apiClient.get("/subcategories").then((res) => res.data);
+  try {
+    const response = await apiClient.get("/subcategories");
+    return response.data;
+  } catch {
+    throw new Error("Failed to find subcategories");
+  }
 };
 
 export const createSubcategory = async (data: { name: string; img: string }) => {
   try {
-    const response = await apiClient.post(`${API_URL}/subcategories`, data);
+    const response = await apiClient.post(`/subcategories`, data);
     return response.data;
-  } catch (e) {
+  } catch {
     throw new Error("Failed to create subcategory");
   }
 };
