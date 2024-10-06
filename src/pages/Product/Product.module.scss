@@ -61,3 +61,32 @@
   font-size: 36px;
   font-weight: 700;
 }
+
+.size {
+  font-size: 16px;
+  margin-top: 8px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.button {
+  width: 252px;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  background: rgb(0, 133, 0);
+  cursor: pointer;
+  color: white;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  // text-transform: uppercase;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: rgb(0, 107, 0);
+  }
+
+  &_container {
+    margin-top: 244px;
+  }
+}

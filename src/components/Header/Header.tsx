@@ -1,11 +1,19 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import styles from "./Header.module.scss";
 import { useIsCartStore } from "../../store/isCartStore";
+import DropButton from "../DropButton/DropButton";
+import { useCreateStore } from "../../store/createStore";
 
 const Header: FC = () => {
   const updateIsCart = useIsCartStore((state) => state.updateIsCart);
+
+  const categoryOpen = useCreateStore((state) => state.categoryOpen);
+  const subcategoryOpen = useCreateStore((state) => state.subcategoryOpen);
+  const productOpen = useCreateStore((state) => state.productOpen);
+
+  const [isAdmin, setAdmin] = useState<boolean>(true);
 
   return (
     <div className={styles.header}>
@@ -32,17 +40,35 @@ const Header: FC = () => {
         </div>
 
         <div className={styles.account}>
-          <NavLink
-            to="/registration"
-            onClick={() => updateIsCart()}
-            className={styles.sign_up}>
-            sing up
-          </NavLink>
-          <NavLink
-            to="/login"
-            className={styles.sign_in}>
-            sing in
-          </NavLink>
+          {isAdmin ? (
+            <>
+              <DropButton
+                handleCategory={() => categoryOpen()}
+                handleSubcategory={() => subcategoryOpen()}
+                handleProduct={() => productOpen()}
+              />
+              <button
+                className={styles.logout}
+                onClick={() => setAdmin(false)}>
+                log out
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/registration"
+                onClick={() => updateIsCart()}
+                className={styles.sign_up}>
+                sing up
+              </NavLink>
+              <NavLink
+                onClick={() => setAdmin(true)}
+                to="/login"
+                className={styles.sign_in}>
+                sing in
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </div>

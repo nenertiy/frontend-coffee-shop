@@ -23,6 +23,10 @@ const Product: FC = () => {
       </div>
       <div className={styles.cart}>
         <div className={styles.price}>$ 4.53</div>
+        <div className={styles.size}>500ml</div>
+        <div className={styles.button_container}>
+          <button className={styles.button}>Add to cart</button>
+        </div>
       </div>
     </div>
   );

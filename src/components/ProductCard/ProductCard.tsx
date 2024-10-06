@@ -2,6 +2,7 @@ import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
 import coffee from "../../assets/coffee.png";
+import plusIcon from "../../assets/img/plus.svg";
 
 import styles from "./ProductCard.module.scss";
 
@@ -21,7 +22,12 @@ const ProductCard: FC = () => {
       <div className={styles.container_price}>
         <div className={styles.price}>$ 4.53</div>
         <div>
-          <button className={styles.button}>+</button>
+          <button className={styles.button}>
+            <img
+              src={plusIcon}
+              alt=""
+            />
+          </button>
         </div>
       </div>
     </div>

@@ -56,6 +56,7 @@
   padding: 8px 12px;
   border-radius: 20px;
   transition: background 0.2s ease-in-out;
+  color: white;
 
   &:hover {
     background: rgb(0, 107, 0);
@@ -69,5 +70,44 @@
 
   &:hover {
     color: rgb(0, 133, 0);
+  }
+}
+
+// .create {
+//   font-size: 15px;
+//   font-family: inherit;
+//   font-weight: 700;
+//   border: none;
+//   text-transform: uppercase;
+//   border-radius: 20px;
+//   transition: color 0.2s ease-in-out;
+//   background: transparent;
+//   color: black;
+//   cursor: pointer;
+//   padding: 0;
+
+//   &:hover {
+//     color: rgb(0, 133, 0);
+//   }
+// }
+
+.logout {
+  text-decoration: none;
+  background: rgb(0, 133, 0);
+  font-family: inherit;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  color: white;
+  height: 31px;
+  padding: 0 12px;
+  border-radius: 20px;
+  transition: background 0.2s ease-in-out;
+  color: white;
+
+  &:hover {
+    background: rgb(0, 107, 0);
   }
 }
