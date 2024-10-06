@@ -1,19 +1,23 @@
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import coffee from "../../assets/coffee.png";
 
 import styles from "./CategoryCard.module.scss";
 
-const CategoryCard: FC = () => {
+interface CategoryCardProps {
+  img: string;
+  name: string;
+}
+
+const CategoryCard: FC<CategoryCardProps> = ({ img, name }) => {
   return (
     <NavLink
       to="/"
       className={styles.container}>
       <img
-        src={coffee}
+        src={img}
         alt=""
       />
-      <div className={styles.title}>Hot coffee</div>
+      <div className={styles.title}>{name}</div>
     </NavLink>
   );
 };

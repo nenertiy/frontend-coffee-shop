@@ -3,19 +3,41 @@ import { FC } from "react";
 import styles from "./Menu.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Input from "../../components/Input/Input";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts } from "../../utils/api";
+import { useCreateStore } from "../../store/createStore";
 
 const Menu: FC = () => {
+  const productOpen = useCreateStore((state) => state.productOpen);
+  const { data } = useQuery({
+    queryKey: ["products", productOpen],
+    queryFn: fetchProducts,
+    refetchOnMount: true,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: true,
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.input}>
         <Input />
       </div>
       <div className={styles.list}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {data?.map(
+          (product: {
+            name: string;
+            img: string;
+            price: number;
+            productCategory: { name: string };
+          }) => (
+            <ProductCard
+              name={product.name}
+              img={product.img}
+              price={product.price}
+              category={product.productCategory.name}
+            />
+          )
+        )}
       </div>
       <div className={styles.pagination}></div>
     </div>

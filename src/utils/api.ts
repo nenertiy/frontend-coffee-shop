@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 
 const API_URL = "http://localhost:3000/api";
@@ -31,7 +30,13 @@ export const fetchProduct = async (id: number) => {
   }
 };
 
-export const createProduct = async (data) => {
+export const createProduct = async (data: {
+  name: string;
+  description: string;
+  img: string;
+  price: number;
+  productCategoryId: number;
+}) => {
   try {
     const response = await apiClient.post(`/products`, data);
     return response.data;

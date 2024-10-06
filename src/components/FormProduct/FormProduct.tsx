@@ -62,6 +62,7 @@ const FormProduct: FC = () => {
           <input
             {...register("price", { required: true })}
             type="number"
+            step="0.1"
             id="price"
           />
         </div>
