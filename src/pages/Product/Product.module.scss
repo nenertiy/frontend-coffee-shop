@@ -14,7 +14,7 @@
 .img {
   box-sizing: border-box;
   width: 400px;
-  height: 400px;
+  max-height: 400px;
   border-radius: 48px;
   background: rgb(254, 254, 254);
   box-shadow: 0 2px 3px #00000012, 0 2px 3px #0000000f, 0 1px 3px #0000001a;
@@ -22,6 +22,7 @@
   align-items: center;
   > img {
     width: 360px;
+    max-height: 360px;
     border-radius: 36px;
   }
 }
