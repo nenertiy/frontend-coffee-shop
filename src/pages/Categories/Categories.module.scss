@@ -3,7 +3,7 @@
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1248px;
   margin-inline: auto;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .line {
-  width: 1440px;
+  width: 1248px;
   height: 1px;
   margin-top: 20px;
   background: rgba(0, 0, 0, 0.25);
@@ -26,4 +26,6 @@
 
 .list {
   margin-top: 30px;
+  display: flex;
+  gap: 40px;
 }

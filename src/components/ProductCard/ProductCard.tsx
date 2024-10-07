@@ -10,18 +10,20 @@ interface ProductCardProps {
   price: number;
   img: string;
   category: string;
+  id: string;
 }
 
-const ProductCard: FC<ProductCardProps> = ({ name, price, img, category }) => {
+const ProductCard: FC<ProductCardProps> = ({
+  name,
+  price,
+  img,
+  category,
+  id,
+}) => {
   return (
     <div className={styles.container}>
-      <NavLink
-        to="/product/1"
-        className={styles.img}>
-        <img
-          src={img}
-          alt=""
-        />
+      <NavLink to={`/product/${id}`} className={styles.img}>
+        <img src={img} alt="" />
       </NavLink>
       <div className={styles.title}>{name}</div>
       <div className={styles.subtitle}>{category}</div>
@@ -29,10 +31,7 @@ const ProductCard: FC<ProductCardProps> = ({ name, price, img, category }) => {
         <div className={styles.price}>$ {price}</div>
         <div>
           <button className={styles.button}>
-            <img
-              src={plusIcon}
-              alt=""
-            />
+            <img src={plusIcon} alt="" />
           </button>
         </div>
       </div>

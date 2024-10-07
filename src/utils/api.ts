@@ -20,10 +20,10 @@ export const fetchProducts = async () => {
   }
 };
 
-export const fetchProduct = async (id: number) => {
+export const fetchProduct = async (id: string | undefined) => {
   // return apiClient.get(`/products/${id}`).then((res) => res.data);
   try {
-    const response = await apiClient.get(`/products?${id}`);
+    const response = await apiClient.get(`/products/${id}`);
     return response.data;
   } catch {
     throw new Error("Failed to find products");
@@ -56,7 +56,10 @@ export const fetchCategories = async () => {
   }
 };
 
-export const createCategory = async (data: { name: string; subCategoryId: number[] }) => {
+export const createCategory = async (data: {
+  name: string;
+  subCategoryId: number[];
+}) => {
   try {
     const response = await apiClient.post(`/categories`, data);
     return response.data;
@@ -76,7 +79,10 @@ export const fetchSubcategories = async () => {
   }
 };
 
-export const createSubcategory = async (data: { name: string; img: string }) => {
+export const createSubcategory = async (data: {
+  name: string;
+  img: string;
+}) => {
   try {
     const response = await apiClient.post(`/subcategories`, data);
     return response.data;

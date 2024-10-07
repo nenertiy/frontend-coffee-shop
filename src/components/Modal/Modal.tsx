@@ -16,13 +16,8 @@ const Modal: FC<ModalProps> = ({ onClose, children, isOpen }) => {
         <div className={styles.modal}>
           <div className={styles.modal_wrapper}>
             <div className={styles.modal_content}>
-              <button
-                onClick={onClose}
-                className={styles.modal_close_button}>
-                <img
-                  src={iconClose}
-                  alt=""
-                />
+              <button onClick={onClose} className={styles.modal_close_button}>
+                <img src={iconClose} alt="" />
               </button>
               {children}
             </div>

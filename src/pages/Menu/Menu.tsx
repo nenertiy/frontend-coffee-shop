@@ -12,11 +12,9 @@ const Menu: FC = () => {
   const { data } = useQuery({
     queryKey: ["products", productOpen],
     queryFn: fetchProducts,
-    refetchOnMount: true,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
   });
 
+  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.input}>
@@ -25,12 +23,15 @@ const Menu: FC = () => {
       <div className={styles.list}>
         {data?.map(
           (product: {
+            id: string;
             name: string;
             img: string;
             price: number;
             productCategory: { name: string };
           }) => (
             <ProductCard
+              key={product.id}
+              id={product.id}
               name={product.name}
               img={product.img}
               price={product.price}
