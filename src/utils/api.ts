@@ -45,6 +45,24 @@ export const createProduct = async (data: {
   }
 };
 
+export const updateProduct = async (
+  id: number,
+  data: {
+    name: string;
+    description: string;
+    img: string;
+    price: number;
+    productCategoryId: number;
+  }
+) => {
+  try {
+    const response = await apiClient.patch(`/products/${id}`, data);
+    return response.data;
+  } catch {
+    throw new Error("Failed to update product");
+  }
+};
+
 //Categories
 export const fetchCategories = async () => {
   // return axios.get("/categories").then((res) => res.data);
@@ -56,15 +74,24 @@ export const fetchCategories = async () => {
   }
 };
 
-export const createCategory = async (data: {
-  name: string;
-  subCategoryId: number[];
-}) => {
+export const createCategory = async (data: { name: string; subCategoryId: number[] }) => {
   try {
     const response = await apiClient.post(`/categories`, data);
     return response.data;
   } catch {
-    throw new Error("Failed to create subcategory");
+    throw new Error("Failed to create category");
+  }
+};
+
+export const updateCategory = async (
+  data: { name: string; subCategoryId: number[] },
+  id: number
+) => {
+  try {
+    const response = await apiClient.patch(`/categories/${id}`, data);
+    return response.data;
+  } catch {
+    throw new Error("Failed to update category");
   }
 };
 
@@ -79,10 +106,7 @@ export const fetchSubcategories = async () => {
   }
 };
 
-export const createSubcategory = async (data: {
-  name: string;
-  img: string;
-}) => {
+export const createSubcategory = async (data: { name: string; img: string }) => {
   try {
     const response = await apiClient.post(`/subcategories`, data);
     return response.data;

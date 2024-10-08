@@ -93,3 +93,28 @@
     margin-top: 244px;
   }
 }
+
+.edit {
+  max-width: 1440px;
+  margin-inline: auto;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
+  > button {
+    font-size: 18px;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: black;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: rgb(0, 133, 0);
+    }
+  }
+}
