@@ -20,17 +20,17 @@ const Modals: FC = () => {
       <Modal
         onClose={() => subcategoryOpen()}
         isOpen={subcategoryIsOpen}>
-        <FormSubcategory />
+        <FormSubcategory onSuccess={() => subcategoryOpen()} />
       </Modal>
       <Modal
         onClose={() => categoryOpen()}
         isOpen={categoryIsOpen}>
-        <FormCategory />
+        <FormCategory onSuccess={() => categoryOpen()} />
       </Modal>
       <Modal
         onClose={() => productOpen()}
         isOpen={productIsOpen}>
-        <FormProduct />
+        <FormProduct onSuccess={() => productOpen()} />
       </Modal>
     </>
   );

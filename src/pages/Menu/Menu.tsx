@@ -14,7 +14,8 @@ const Menu: FC = () => {
     queryFn: fetchProducts,
   });
 
-  console.log(data);
+  // console.log(data);
+
   return (
     <div className={styles.container}>
       <div className={styles.input}>

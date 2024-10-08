@@ -13,10 +13,12 @@ const CategoryCard: FC<CategoryCardProps> = ({ img, name }) => {
     <NavLink
       to="/"
       className={styles.container}>
-      <img
-        src={img}
-        alt=""
-      />
+      <div className={styles.img}>
+        <img
+          src={img}
+          alt=""
+        />
+      </div>
       <div className={styles.title}>{name}</div>
     </NavLink>
   );

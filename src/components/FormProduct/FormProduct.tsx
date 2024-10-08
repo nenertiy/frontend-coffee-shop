@@ -1,12 +1,17 @@
 import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { createProduct, fetchSubcategories } from "../../utils/api";
 
 import styles from "./FormProduct.module.scss";
 
-const FormProduct: FC = () => {
+interface FormProductProps {
+  onSuccess: () => void;
+}
+
+const FormProduct: FC<FormProductProps> = ({ onSuccess }) => {
   interface ProductFormData {
     name: string;
     img: string;
@@ -16,15 +21,23 @@ const FormProduct: FC = () => {
   }
 
   const { data } = useQuery({ queryKey: ["subcategories"], queryFn: fetchSubcategories });
-  const { register, handleSubmit } = useForm<ProductFormData>();
+  const { register, handleSubmit, reset } = useForm<ProductFormData>();
+  const queryClient = useQueryClient();
 
-  const onSubmit: SubmitHandler<ProductFormData> = (data) => {
-    const productData = {
-      ...data,
-      price: parseFloat(data.price.toString()),
-      productCategoryId: parseInt(data.productCategoryId.toString()),
-    };
-    createProduct(productData);
+  const onSubmit: SubmitHandler<ProductFormData> = async (formData) => {
+    try {
+      const productData = {
+        ...formData,
+        price: parseFloat(formData.price.toString()),
+        productCategoryId: parseInt(formData.productCategoryId.toString()),
+      };
+      await createProduct(productData);
+      reset();
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      onSuccess();
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
   };
 
   return (
@@ -79,7 +92,11 @@ const FormProduct: FC = () => {
           </select>
         </div>
         <div className={styles.button_container}>
-          <button className={styles.button}>Create</button>
+          <button
+            type="submit"
+            className={styles.button}>
+            Create
+          </button>
         </div>
       </form>
     </div>

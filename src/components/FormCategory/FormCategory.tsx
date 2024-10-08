@@ -1,12 +1,16 @@
 import { FC, useState, useEffect } from "react";
 import styles from "./FormCategory.module.scss";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createCategory, fetchSubcategories } from "../../utils/api";
 import { useForm } from "react-hook-form";
 import CustomMultiselect from "../CustomMultiselect/CustomMultiselect";
 
-const FormCategory: FC = () => {
-  const { register, handleSubmit, setValue } = useForm({
+interface FormCategoryProps {
+  onSuccess: () => void;
+}
+
+const FormCategory: FC<FormCategoryProps> = ({ onSuccess }) => {
+  const { register, handleSubmit, setValue, reset } = useForm({
     defaultValues: {
       name: "",
       subCategoryId: [] as number[],
@@ -17,7 +21,9 @@ const FormCategory: FC = () => {
     id: number;
     name: string;
   }
+
   const [selected, setSelected] = useState<SelectedState[]>([]);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setValue(
@@ -27,7 +33,14 @@ const FormCategory: FC = () => {
   }, [selected, setValue]);
 
   const onSubmit = async (data: { name: string; subCategoryId: number[] }) => {
-    await createCategory(data);
+    try {
+      await createCategory(data);
+      reset();
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      onSuccess();
+    } catch (error) {
+      console.error("Error creating category:", error);
+    }
   };
 
   const { data } = useQuery({

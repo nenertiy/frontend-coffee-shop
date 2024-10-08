@@ -1,20 +1,30 @@
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import { createSubcategory } from "../../utils/api";
 
 import styles from "./FormSubcategory.module.scss";
 
-const FormSubcategory: FC = () => {
+interface FormSubcategoryProps {
+  onSuccess: () => void;
+}
+
+const FormSubcategory: FC<FormSubcategoryProps> = ({ onSuccess }) => {
   interface SubcategoryFormData {
     name: string;
     img: string;
   }
 
-  const { register, handleSubmit } = useForm<SubcategoryFormData>();
+  const { register, handleSubmit, reset } = useForm<SubcategoryFormData>();
 
-  const onSubmit: SubmitHandler<SubcategoryFormData> = (data) =>
-    createSubcategory({ name: data.name, img: data.img });
+  const onSubmit: SubmitHandler<SubcategoryFormData> = async (data) => {
+    try {
+      await createSubcategory({ name: data.name, img: data.img });
+      reset();
+      onSuccess();
+    } catch (error) {
+      console.error("Error creating subcategory:", error);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -39,7 +49,11 @@ const FormSubcategory: FC = () => {
           />
         </div>
         <div className={styles.button_container}>
-          <button className={styles.button}>Create</button>
+          <button
+            type="submit"
+            className={styles.button}>
+            Create
+          </button>
         </div>
       </form>
     </div>
