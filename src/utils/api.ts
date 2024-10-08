@@ -95,6 +95,18 @@ export const updateCategory = async (
   }
 };
 
+export const deleteCategory = async (id: number | undefined) => {
+  if (!id) {
+    throw new Error("Category ID is required");
+  }
+  try {
+    const response = await apiClient.delete(`categories/${id}`);
+    return response.data;
+  } catch {
+    throw new Error(`Failed to delete category`);
+  }
+};
+
 //Subcategories
 export const fetchSubcategories = async () => {
   // return apiClient.get("/subcategories").then((res) => res.data);

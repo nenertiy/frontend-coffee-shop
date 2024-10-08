@@ -16,20 +16,30 @@
   justify-content: space-between;
   align-items: center;
 
-  > button {
-    font-size: 16px;
-    font-family: inherit;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: black;
-    transition: color 0.2s ease-in-out;
-
-    &:hover {
-      color: rgb(0, 133, 0);
+  &_container {
+    > button {
+      font-size: 16px;
+      font-family: inherit;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: black;
+      transition: color 0.2s ease-in-out;
     }
+  }
+}
+
+.delete {
+  &:hover {
+    color: rgb(165, 0, 0);
+  }
+}
+
+.edit {
+  &:hover {
+    color: rgb(0, 133, 0);
   }
 }
 

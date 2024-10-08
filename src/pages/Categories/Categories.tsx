@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import styles from "./Categories.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { fetchCategories, fetchSubcategories } from "../../utils/api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteCategory, fetchCategories, fetchSubcategories } from "../../utils/api";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Modal from "../../components/Modal/Modal";
 import FormEditCategory from "../../components/FormCategory/FormEditCategory";
@@ -17,6 +17,8 @@ const Categories: FC = () => {
     queryFn: fetchSubcategories,
   });
 
+  const queryClient = useQueryClient();
+
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
   const [currentCategoryName, setCurrentCategoryName] = useState("");
@@ -24,7 +26,7 @@ const Categories: FC = () => {
     []
   );
 
-  const handleEditClick = (
+  const handleEdit = (
     categoryId: number,
     categoryName: string,
     subcategories: { id: number; name: string }[]
@@ -33,6 +35,13 @@ const Categories: FC = () => {
     setCurrentCategoryName(categoryName);
     setCurrentSubcategories(subcategories);
     setEditModalOpen(true);
+  };
+
+  const handleDelete = (categoryId: number) => {
+    deleteCategory(categoryId);
+    queryClient.invalidateQueries({
+      queryKey: ["categories", categoryId],
+    });
   };
 
   return (
@@ -48,12 +57,18 @@ const Categories: FC = () => {
               <div key={category.id}>
                 <div className={styles.bar}>
                   <div className={styles.title}>{category.name}</div>
-                  <button
-                    onClick={() =>
-                      handleEditClick(category.id, category.name, category.subCategory)
-                    }>
-                    Edit
-                  </button>
+                  <div className={styles.bar_container}>
+                    <button
+                      className={styles.delete}
+                      onClick={() => handleDelete(category.id)}>
+                      Delete
+                    </button>
+                    <button
+                      className={styles.edit}
+                      onClick={() => handleEdit(category.id, category.name, category.subCategory)}>
+                      Edit
+                    </button>
+                  </div>
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.list}>
