@@ -6,12 +6,13 @@ import styles from "./CategoryCard.module.scss";
 interface CategoryCardProps {
   img: string;
   name: string;
+  id: number;
 }
 
-const CategoryCard: FC<CategoryCardProps> = ({ img, name }) => {
+const CategoryCard: FC<CategoryCardProps> = ({ img, name, id }) => {
   return (
     <NavLink
-      to="/"
+      to={`/products/category/${id}`}
       className={styles.container}>
       <div className={styles.img}>
         <img

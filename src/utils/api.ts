@@ -10,10 +10,10 @@ const apiClient = axios.create({
 });
 
 //Products
-export const fetchProducts = async () => {
+export const fetchProducts = async (search: string) => {
   // return apiClient.get("/products").then((res) => res.data);
   try {
-    const response = await apiClient.get("/products");
+    const response = await apiClient.get(`/products?search=${search}`);
     return response.data;
   } catch {
     throw new Error("Failed to find products");
@@ -24,6 +24,15 @@ export const fetchProduct = async (id: string | undefined) => {
   // return apiClient.get(`/products/${id}`).then((res) => res.data);
   try {
     const response = await apiClient.get(`/products/${id}`);
+    return response.data;
+  } catch {
+    throw new Error("Failed to find products");
+  }
+};
+
+export const fetchProductsByCategory = async (id: string | undefined) => {
+  try {
+    const response = await apiClient.get(`products/category/${id}`);
     return response.data;
   } catch {
     throw new Error("Failed to find products");
@@ -115,6 +124,15 @@ export const fetchSubcategories = async () => {
     return response.data;
   } catch {
     throw new Error("Failed to find subcategories");
+  }
+};
+
+export const fetchSubcategory = async (id: string | undefined) => {
+  try {
+    const response = await apiClient.get(`/subcategories/${id}`);
+    return response.data;
+  } catch {
+    throw new Error("Failed to find subcategory");
   }
 };
 

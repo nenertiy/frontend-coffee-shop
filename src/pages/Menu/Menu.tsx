@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import styles from "./Menu.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
@@ -8,18 +8,26 @@ import { fetchProducts } from "../../utils/api";
 import { useCreateStore } from "../../store/createStore";
 
 const Menu: FC = () => {
+  const [searchValue, setSearchValue] = useState<string>("");
+
   const productOpen = useCreateStore((state) => state.productOpen);
   const { data } = useQuery({
-    queryKey: ["products", productOpen],
-    queryFn: fetchProducts,
+    queryKey: ["products", productOpen, searchValue],
+    queryFn: () => fetchProducts(searchValue),
   });
 
-  // console.log(data);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchValue(value);
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.input}>
-        <Input />
+        <Input
+          value={searchValue}
+          handleChange={handleChange}
+        />
       </div>
       <div className={styles.list}>
         {data?.map(
@@ -36,7 +44,7 @@ const Menu: FC = () => {
               name={product.name}
               img={product.img}
               price={product.price}
-              category={product.productCategory.name}
+              category={product?.productCategory?.name}
             />
           )
         )}

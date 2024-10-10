@@ -72,9 +72,10 @@ const Categories: FC = () => {
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.list}>
-                  {category.subCategory.map((subcategory) => (
+                  {category?.subCategory?.map((subcategory) => (
                     <CategoryCard
                       key={subcategory.id}
+                      id={subcategory.id}
                       img={subcategory.img}
                       name={subcategory.name}
                     />

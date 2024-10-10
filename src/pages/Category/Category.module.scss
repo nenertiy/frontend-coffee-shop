@@ -1,0 +1,58 @@
+.container {
+  margin-top: 30px;
+  max-width: 1248px;
+  margin-inline: auto;
+  margin-bottom: 30px;
+}
+
+.list {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &_container {
+    > button {
+      font-size: 16px;
+      font-family: inherit;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: black;
+      transition: color 0.2s ease-in-out;
+    }
+  }
+}
+
+.delete {
+  &:hover {
+    color: rgb(165, 0, 0);
+  }
+}
+
+.edit {
+  &:hover {
+    color: rgb(0, 133, 0);
+  }
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.line {
+  width: 1248px;
+  height: 1px;
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.25);
+}
