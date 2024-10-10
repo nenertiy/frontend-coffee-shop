@@ -1,13 +1,16 @@
 import { FC } from "react";
 
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProductsByCategory, fetchSubcategory } from "../../utils/api";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteSubcategory, fetchProductsByCategory, fetchSubcategory } from "../../utils/api";
 
 import styles from "./Category.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 
 const Category: FC = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const { data: products } = useQuery({
     queryKey: ["productsByCategory"],
@@ -19,8 +22,13 @@ const Category: FC = () => {
     queryFn: () => fetchSubcategory(id),
   });
 
-  console.log(products);
-  console.log(subcategory);
+  const handleDelete = (categoryId: string) => {
+    deleteSubcategory(categoryId);
+    navigate(-1);
+    queryClient.invalidateQueries({
+      queryKey: ["categories", categoryId],
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -29,8 +37,7 @@ const Category: FC = () => {
         <div className={styles.bar_container}>
           <button
             className={styles.delete}
-            // onClick={() => handleDelete(category.id)}
-          >
+            onClick={() => handleDelete(subcategory.id)}>
             Delete
           </button>
           <button

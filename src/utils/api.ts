@@ -144,3 +144,15 @@ export const createSubcategory = async (data: { name: string; img: string }) => 
     throw new Error("Failed to create subcategory");
   }
 };
+
+export const deleteSubcategory = async (id: string | undefined) => {
+  if (!id) {
+    throw new Error("Subcategory ID is required");
+  }
+  try {
+    const response = await apiClient.delete(`subcategories/${id}`);
+    return response.data;
+  } catch {
+    throw new Error(`Failed to delete subcategory`);
+  }
+};

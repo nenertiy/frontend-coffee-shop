@@ -36,7 +36,7 @@ const Product: FC = () => {
             </div>
             <div className={styles.container_description}>
               <div className={styles.title}>{data.name}</div>
-              <div className={styles.subtitle}>{data.productCategory.name}</div>
+              <div className={styles.subtitle}>{data.productCategory?.name}</div>
               <div className={styles.description}>{data.description}</div>
             </div>
 
