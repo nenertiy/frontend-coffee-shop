@@ -1,22 +1,32 @@
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import styles from "./Header.module.scss";
 // import { useIsCartStore } from "../../store/isCartStore";
 import DropButton from "../DropButton/DropButton";
 import { useCreateStore } from "../../store/createStore";
 import { useAuthStore } from "../../store/authStore";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Header: FC = () => {
   // const updateIsCart = useIsCartStore((state) => state.updateIsCart);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const categoryOpen = useCreateStore((state) => state.categoryOpen);
   const subcategoryOpen = useCreateStore((state) => state.subcategoryOpen);
   const productOpen = useCreateStore((state) => state.productOpen);
 
+  const userId = useAuthStore((state) => state.userId);
   const authStatus = useAuthStore((state) => state.auth);
   const isAdmin = useAuthStore((state) => state.isAdmin);
   const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    queryClient.invalidateQueries({ queryKey: ["cart", authStatus, userId] });
+    navigate("/menu");
+    logout();
+  };
 
   return (
     <div className={styles.header}>
@@ -54,7 +64,7 @@ const Header: FC = () => {
               )}
               <button
                 className={styles.logout}
-                onClick={logout}>
+                onClick={handleLogout}>
                 log out
               </button>
             </>

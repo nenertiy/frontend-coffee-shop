@@ -2,15 +2,24 @@ import { FC, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteSubcategory, fetchProductsByCategory, fetchSubcategory } from "../../utils/api";
+import {
+  addToCart,
+  deleteSubcategory,
+  fetchProductsByCategory,
+  fetchSubcategory,
+} from "../../utils/api";
 
 import styles from "./Category.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Modal from "../../components/Modal/Modal";
 import FormEditSubcategory from "../../components/FormSubcategory/FormEditSubcategory";
+import { useAuthStore } from "../../store/authStore";
 
 const Category: FC = () => {
   const [isEditing, setIsEditing] = useState(false);
+
+  const isAdmin = useAuthStore((state) => state.isAdmin);
+  const userId = useAuthStore((state) => state.userId);
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -45,22 +54,33 @@ const Category: FC = () => {
     });
   };
 
+  const handleAddToCart = async () => {
+    try {
+      await addToCart(Number(userId), Number(id));
+      alert("Product added to cart!");
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.bar}>
         <div className={styles.title}>{subcategory?.name}</div>
-        <div className={styles.bar_container}>
-          <button
-            className={styles.delete}
-            onClick={() => handleDelete(subcategory.id)}>
-            Delete
-          </button>
-          <button
-            className={styles.edit}
-            onClick={handleEditClick}>
-            Edit
-          </button>
-        </div>
+        {isAdmin && (
+          <div className={styles.bar_container}>
+            <button
+              className={styles.delete}
+              onClick={() => handleDelete(subcategory.id)}>
+              Delete
+            </button>
+            <button
+              className={styles.edit}
+              onClick={handleEditClick}>
+              Edit
+            </button>
+          </div>
+        )}
       </div>
       <div className={styles.line}></div>
       <div className={styles.list}>
@@ -79,6 +99,7 @@ const Category: FC = () => {
               img={product.img}
               price={product.price}
               category={product?.productCategory?.name}
+              handleAddToCart={handleAddToCart}
             />
           )
         )}

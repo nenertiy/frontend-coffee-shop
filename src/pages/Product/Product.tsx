@@ -19,6 +19,7 @@ const Product: FC = () => {
   });
 
   const userId = useAuthStore((state) => state.userId);
+  const isAdmin = useAuthStore((state) => state.isAdmin);
 
   const handleDelete = (productId: number) => {
     deleteProduct(productId);
@@ -76,18 +77,20 @@ const Product: FC = () => {
           </>
         )}
       </div>
-      <div className={styles.buttons}>
-        <button
-          onClick={() => handleDelete(data.id)}
-          className={styles.delete}>
-          Delete
-        </button>
-        <button
-          onClick={handleEditClick}
-          className={styles.edit}>
-          Edit
-        </button>
-      </div>
+      {isAdmin && (
+        <div className={styles.buttons}>
+          <button
+            onClick={() => handleDelete(data.id)}
+            className={styles.delete}>
+            Delete
+          </button>
+          <button
+            onClick={handleEditClick}
+            className={styles.edit}>
+            Edit
+          </button>
+        </div>
+      )}
 
       {isEditing && (
         <Modal

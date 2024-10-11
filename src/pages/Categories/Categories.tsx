@@ -5,8 +5,11 @@ import { deleteCategory, fetchCategories, fetchSubcategories } from "../../utils
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Modal from "../../components/Modal/Modal";
 import FormEditCategory from "../../components/FormCategory/FormEditCategory";
+import { useAuthStore } from "../../store/authStore";
 
 const Categories: FC = () => {
+  const isAdmin = useAuthStore((state) => state.isAdmin);
+
   const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
@@ -57,18 +60,22 @@ const Categories: FC = () => {
               <div key={category.id}>
                 <div className={styles.bar}>
                   <div className={styles.title}>{category.name}</div>
-                  <div className={styles.bar_container}>
-                    <button
-                      className={styles.delete}
-                      onClick={() => handleDelete(category.id)}>
-                      Delete
-                    </button>
-                    <button
-                      className={styles.edit}
-                      onClick={() => handleEdit(category.id, category.name, category.subCategory)}>
-                      Edit
-                    </button>
-                  </div>
+                  {isAdmin && (
+                    <div className={styles.bar_container}>
+                      <button
+                        className={styles.delete}
+                        onClick={() => handleDelete(category.id)}>
+                        Delete
+                      </button>
+                      <button
+                        className={styles.edit}
+                        onClick={() =>
+                          handleEdit(category.id, category.name, category.subCategory)
+                        }>
+                        Edit
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.list}>

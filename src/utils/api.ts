@@ -194,24 +194,12 @@ export const deleteSubcategory = async (id: string | undefined) => {
 };
 
 //Cart
-
 export const addToCart = async (userId: number, productId: number, quantity: number = 1) => {
   try {
     const response = await apiClient.post(`cart/add`, {
       userId,
       productId,
       quantity,
-    });
-    return response.data;
-  } catch {
-    console.log();
-  }
-};
-
-export const removeFromCart = async (userId: string | null, productId: number) => {
-  try {
-    const response = await apiClient.delete(`cart/remove`, {
-      data: { userId, productId },
     });
     return response.data;
   } catch {
