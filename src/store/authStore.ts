@@ -5,19 +5,22 @@ interface AuthState {
   auth: boolean;
   isAdmin: boolean;
   role: string | null;
-  login: (token: string, role: string) => void;
+  userId: string | null;
+  login: (token: string, role: string, userId: string) => void;
   logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   token: null,
   auth: localStorage.getItem("token") ? true : false,
-  isAdmin: false,
+  isAdmin: localStorage.getItem("role") == "admin" ? true : false,
   role: null,
-  login: (token, role) => {
-    set({ token, auth: true, role });
+  userId: localStorage.getItem("userId") ? localStorage.getItem("userId") : null,
+  login: (token, role, userId) => {
+    set({ token, auth: true, role, userId });
     localStorage.setItem("token", token);
     localStorage.setItem("role", role);
+    localStorage.setItem("userId", userId);
     if (role == "admin") {
       set({ isAdmin: true });
     }
@@ -26,5 +29,6 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ token: null, auth: false, role: null, isAdmin: false });
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("userId");
   },
 }));

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { NavLink } from "react-router-dom";
 
 import styles from "./CartFooter.module.scss";
 
@@ -8,10 +9,12 @@ const CartFooter: FC = () => {
       <div className={styles.container}>
         <div>Cart</div>
         <div>
-          <span className={styles.cart}>
+          <NavLink
+            to="/cart"
+            className={styles.cart}>
             <span className={styles.icon}></span>
-            <span className={styles.number}>2</span>
-          </span>
+            <span className={styles.number}></span>
+          </NavLink>
         </div>
       </div>
     </div>

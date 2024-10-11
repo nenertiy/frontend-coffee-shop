@@ -11,27 +11,32 @@ interface ProductCardProps {
   img: string;
   category: string;
   id: string;
+  handleAddToCart: () => void;
 }
 
-const ProductCard: FC<ProductCardProps> = ({
-  name,
-  price,
-  img,
-  category,
-  id,
-}) => {
+const ProductCard: FC<ProductCardProps> = ({ name, price, img, category, id, handleAddToCart }) => {
   return (
     <div className={styles.container}>
-      <NavLink to={`/product/${id}`} className={styles.img}>
-        <img src={img} alt="" />
+      <NavLink
+        to={`/product/${id}`}
+        className={styles.img}>
+        <img
+          src={img}
+          alt=""
+        />
       </NavLink>
       <div className={styles.title}>{name}</div>
       <div className={styles.subtitle}>{category}</div>
       <div className={styles.container_price}>
         <div className={styles.price}>$ {price}</div>
         <div>
-          <button className={styles.button}>
-            <img src={plusIcon} alt="" />
+          <button
+            className={styles.button}
+            onClick={handleAddToCart}>
+            <img
+              src={plusIcon}
+              alt=""
+            />
           </button>
         </div>
       </div>

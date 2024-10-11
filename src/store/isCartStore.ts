@@ -6,6 +6,6 @@ interface IsCartStore {
 }
 
 export const useIsCartStore = create<IsCartStore>()((set) => ({
-  isCart: false,
+  isCart: true,
   updateIsCart: () => set((state) => ({ isCart: !state.isCart })),
 }));

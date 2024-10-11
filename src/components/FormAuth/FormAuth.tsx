@@ -20,7 +20,7 @@ const FormAuth: FC = () => {
   const onSubmit: SubmitHandler<AuthFormData> = async (data) => {
     try {
       const response = await auth({ email: data.email, password: data.password });
-      login(response.access_token, response.role);
+      login(response.access_token, response.role, response.id);
       navigate("/menu");
       reset();
     } catch {

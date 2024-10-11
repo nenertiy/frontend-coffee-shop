@@ -2,9 +2,10 @@ import { FC, useState } from "react";
 import styles from "./Product.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteProduct, fetchProduct } from "../../utils/api";
+import { addToCart, deleteProduct, fetchProduct } from "../../utils/api";
 import Modal from "../../components/Modal/Modal";
 import FormEditProduct from "../../components/FormProduct/FormEditProduct";
+import { useAuthStore } from "../../store/authStore";
 
 const Product: FC = () => {
   const queryClient = useQueryClient();
@@ -16,6 +17,8 @@ const Product: FC = () => {
     queryKey: ["product", id],
     queryFn: () => fetchProduct(id),
   });
+
+  const userId = useAuthStore((state) => state.userId);
 
   const handleDelete = (productId: number) => {
     deleteProduct(productId);
@@ -31,6 +34,15 @@ const Product: FC = () => {
 
   const handleCloseModal = () => {
     setIsEditing(false);
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      await addToCart(Number(userId), Number(id));
+      alert("Product added to cart!");
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    }
   };
 
   return (
@@ -52,9 +64,13 @@ const Product: FC = () => {
 
             <div className={styles.cart}>
               <div className={styles.price}>$ {data.price}</div>
-              <div className={styles.size}>500ml</div>
+              {/* <div className={styles.size}>500ml</div> */}
               <div className={styles.button_container}>
-                <button className={styles.button}>Add to cart</button>
+                <button
+                  className={styles.button}
+                  onClick={handleAddToCart}>
+                  Add to cart
+                </button>
               </div>
             </div>
           </>

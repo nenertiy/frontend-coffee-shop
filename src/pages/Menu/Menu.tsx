@@ -4,10 +4,12 @@ import styles from "./Menu.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Input from "../../components/Input/Input";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProducts } from "../../utils/api";
+import { addToCart, fetchProducts } from "../../utils/api";
+import { useAuthStore } from "../../store/authStore";
 
 const Menu: FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
+  const userId = useAuthStore((state) => state.userId);
 
   const { data } = useQuery({
     queryKey: ["products", searchValue],
@@ -17,6 +19,15 @@ const Menu: FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchValue(value);
+  };
+
+  const handleAddToCart = async (id: string) => {
+    try {
+      await addToCart(Number(userId), Number(id));
+      alert("Product added to cart!");
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    }
   };
 
   return (
@@ -43,6 +54,7 @@ const Menu: FC = () => {
               img={product.img}
               price={product.price}
               category={product?.productCategory?.name}
+              handleAddToCart={() => handleAddToCart(product.id)}
             />
           )
         )}

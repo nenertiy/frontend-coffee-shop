@@ -10,7 +10,6 @@ const apiClient = axios.create({
 });
 
 //User
-
 export const registration = async (data: { email: string; name: string; password: string }) => {
   try {
     const response = await apiClient.post(`/auth/register`, data);
@@ -191,5 +190,41 @@ export const deleteSubcategory = async (id: string | undefined) => {
     return response.data;
   } catch {
     throw new Error(`Failed to delete subcategory`);
+  }
+};
+
+//Cart
+
+export const addToCart = async (userId: number, productId: number, quantity: number = 1) => {
+  try {
+    const response = await apiClient.post(`cart/add`, {
+      userId,
+      productId,
+      quantity,
+    });
+    return response.data;
+  } catch {
+    console.log();
+  }
+};
+
+export const removeFromCart = async (userId: string | null, productId: number) => {
+  try {
+    const response = await apiClient.delete(`cart/remove`, {
+      data: { userId, productId },
+    });
+    return response.data;
+  } catch {
+    console.log();
+  }
+};
+
+export const fetchCart = async (userId: string | null) => {
+  if (typeof userId === "string") {
+    const response = await apiClient.get(`/cart/${userId}`);
+    return response.data;
+  } else {
+    const response = await apiClient.get(`/cart/0`);
+    return response.data;
   }
 };
