@@ -9,6 +9,26 @@ const apiClient = axios.create({
   },
 });
 
+//User
+
+export const registration = async (data: { email: string; password: string; name: string }) => {
+  try {
+    const response = await apiClient.post(`/auth/register`, data);
+    return response.data;
+  } catch {
+    throw new Error("Failed");
+  }
+};
+
+export const auth = async (data: { email: string; password: string }) => {
+  try {
+    const response = await apiClient.post("/auth/login", data);
+    return response.data;
+  } catch {
+    throw new Error("Failed");
+  }
+};
+
 //Products
 export const fetchProducts = async (search: string) => {
   try {

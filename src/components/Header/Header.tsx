@@ -1,19 +1,22 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 
 import styles from "./Header.module.scss";
-import { useIsCartStore } from "../../store/isCartStore";
+// import { useIsCartStore } from "../../store/isCartStore";
 import DropButton from "../DropButton/DropButton";
 import { useCreateStore } from "../../store/createStore";
+import { useAuthStore } from "../../store/authStore";
 
 const Header: FC = () => {
-  const updateIsCart = useIsCartStore((state) => state.updateIsCart);
+  // const updateIsCart = useIsCartStore((state) => state.updateIsCart);
 
   const categoryOpen = useCreateStore((state) => state.categoryOpen);
   const subcategoryOpen = useCreateStore((state) => state.subcategoryOpen);
   const productOpen = useCreateStore((state) => state.productOpen);
 
-  const [isAdmin, setAdmin] = useState<boolean>(true);
+  const authStatus = useAuthStore((state) => state.auth);
+  const isAdmin = useAuthStore((state) => state.role);
+  const logout = useAuthStore((state) => state.logout);
 
   return (
     <div className={styles.header}>
@@ -40,16 +43,18 @@ const Header: FC = () => {
         </div>
 
         <div className={styles.account}>
-          {isAdmin ? (
+          {authStatus ? (
             <>
-              <DropButton
-                handleCategory={() => categoryOpen()}
-                handleSubcategory={() => subcategoryOpen()}
-                handleProduct={() => productOpen()}
-              />
+              {isAdmin && (
+                <DropButton
+                  handleCategory={() => categoryOpen()}
+                  handleSubcategory={() => subcategoryOpen()}
+                  handleProduct={() => productOpen()}
+                />
+              )}
               <button
                 className={styles.logout}
-                onClick={() => setAdmin(false)}>
+                onClick={logout}>
                 log out
               </button>
             </>
@@ -57,12 +62,12 @@ const Header: FC = () => {
             <>
               <NavLink
                 to="/registration"
-                onClick={() => updateIsCart()}
+                // onClick={() => updateIsCart()}
                 className={styles.sign_up}>
                 sing up
               </NavLink>
               <NavLink
-                onClick={() => setAdmin(true)}
+                // onClick={() => setAdmin(true)}
                 to="/login"
                 className={styles.sign_in}>
                 sing in

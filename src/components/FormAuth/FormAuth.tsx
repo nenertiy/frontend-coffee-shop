@@ -1,25 +1,49 @@
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import styles from "./FormAuth.module.scss";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { auth } from "../../utils/api";
+import { useAuthStore } from "../../store/authStore";
 
 const FormAuth: FC = () => {
+  interface AuthFormData {
+    email: string;
+    password: string;
+  }
+
+  const navigate = useNavigate();
+
+  const { register, handleSubmit, reset } = useForm<AuthFormData>();
+  const login = useAuthStore((state) => state.login);
+
+  const onSubmit: SubmitHandler<AuthFormData> = async (data) => {
+    try {
+      const response = await auth({ email: data.email, password: data.password });
+      login(response.access_token, response.role);
+      navigate("/menu");
+      reset();
+    } catch {
+      console.error("Failed");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <h2>Sign in</h2>
       <form
         className={styles.form}
-        onSubmit={() => console.log("submit")}>
+        onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.email}>
           <input
-            name="email"
+            {...register("email", { required: true })}
             type="email"
             placeholder="Email"
           />
         </div>
         <div className={styles.password}>
           <input
-            name="password"
+            {...register("password", { required: true })}
             type="password"
             placeholder="Password"
           />
