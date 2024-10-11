@@ -11,7 +11,7 @@ const apiClient = axios.create({
 
 //User
 
-export const registration = async (data: { email: string; password: string; name: string }) => {
+export const registration = async (data: { email: string; name: string; password: string }) => {
   try {
     const response = await apiClient.post(`/auth/register`, data);
     return response.data;

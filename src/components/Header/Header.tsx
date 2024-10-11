@@ -15,7 +15,7 @@ const Header: FC = () => {
   const productOpen = useCreateStore((state) => state.productOpen);
 
   const authStatus = useAuthStore((state) => state.auth);
-  const isAdmin = useAuthStore((state) => state.role);
+  const isAdmin = useAuthStore((state) => state.isAdmin);
   const logout = useAuthStore((state) => state.logout);
 
   return (
