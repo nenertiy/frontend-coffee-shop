@@ -1,19 +1,29 @@
 import { FC, useState } from "react";
 import styles from "./Product.module.scss";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { fetchProduct } from "../../utils/api";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteProduct, fetchProduct } from "../../utils/api";
 import Modal from "../../components/Modal/Modal";
 import FormEditProduct from "../../components/FormProduct/FormEditProduct";
 
 const Product: FC = () => {
+  const queryClient = useQueryClient();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
   const { data, isSuccess } = useQuery({
     queryKey: ["product", id],
     queryFn: () => fetchProduct(id),
   });
+
+  const handleDelete = (productId: number) => {
+    deleteProduct(productId);
+    navigate(-1);
+    queryClient.invalidateQueries({
+      queryKey: ["products", productId],
+    });
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -50,8 +60,17 @@ const Product: FC = () => {
           </>
         )}
       </div>
-      <div className={styles.edit}>
-        <button onClick={handleEditClick}>Edit</button>
+      <div className={styles.buttons}>
+        <button
+          onClick={() => handleDelete(data.id)}
+          className={styles.delete}>
+          Delete
+        </button>
+        <button
+          onClick={handleEditClick}
+          className={styles.edit}>
+          Edit
+        </button>
       </div>
 
       {isEditing && (

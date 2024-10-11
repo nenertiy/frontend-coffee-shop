@@ -5,14 +5,12 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import Input from "../../components/Input/Input";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "../../utils/api";
-import { useCreateStore } from "../../store/createStore";
 
 const Menu: FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const productOpen = useCreateStore((state) => state.productOpen);
   const { data } = useQuery({
-    queryKey: ["products", productOpen, searchValue],
+    queryKey: ["products", searchValue],
     queryFn: () => fetchProducts(searchValue),
   });
 

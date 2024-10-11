@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -6,8 +6,12 @@ import { deleteSubcategory, fetchProductsByCategory, fetchSubcategory } from "..
 
 import styles from "./Category.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import Modal from "../../components/Modal/Modal";
+import FormEditSubcategory from "../../components/FormSubcategory/FormEditSubcategory";
 
 const Category: FC = () => {
+  const [isEditing, setIsEditing] = useState(false);
+
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -21,6 +25,17 @@ const Category: FC = () => {
     queryKey: ["subcategory"],
     queryFn: () => fetchSubcategory(id),
   });
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCloseModal = (categoryId: string | undefined) => {
+    setIsEditing(false);
+    queryClient.invalidateQueries({
+      queryKey: ["category", categoryId],
+    });
+  };
 
   const handleDelete = (categoryId: string) => {
     deleteSubcategory(categoryId);
@@ -42,8 +57,7 @@ const Category: FC = () => {
           </button>
           <button
             className={styles.edit}
-            // onClick={() => handleEdit(category.id, category.name, category.subCategory)}
-          >
+            onClick={handleEditClick}>
             Edit
           </button>
         </div>
@@ -69,6 +83,21 @@ const Category: FC = () => {
           )
         )}
       </div>
+
+      {isEditing && (
+        <Modal
+          onClose={() => handleCloseModal(id)}
+          isOpen={isEditing}>
+          <FormEditSubcategory
+            currentCategory={subcategory}
+            categoryId={id}
+            onSuccess={() => {
+              setIsEditing(false);
+            }}
+            onClose={() => handleCloseModal(id)}
+          />
+        </Modal>
+      )}
     </div>
   );
 };

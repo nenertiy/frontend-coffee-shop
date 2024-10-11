@@ -40,7 +40,7 @@ const Categories: FC = () => {
   const handleDelete = (categoryId: number) => {
     deleteCategory(categoryId);
     queryClient.invalidateQueries({
-      queryKey: ["categories", categoryId],
+      queryKey: ["categories", "subcategory", "subcategories", categoryId],
     });
   };
 

@@ -11,7 +11,6 @@ const apiClient = axios.create({
 
 //Products
 export const fetchProducts = async (search: string) => {
-  // return apiClient.get("/products").then((res) => res.data);
   try {
     const response = await apiClient.get(`/products?search=${search}`);
     return response.data;
@@ -21,7 +20,6 @@ export const fetchProducts = async (search: string) => {
 };
 
 export const fetchProduct = async (id: string | undefined) => {
-  // return apiClient.get(`/products/${id}`).then((res) => res.data);
   try {
     const response = await apiClient.get(`/products/${id}`);
     return response.data;
@@ -72,9 +70,20 @@ export const updateProduct = async (
   }
 };
 
+export const deleteProduct = async (id: number | undefined) => {
+  if (!id) {
+    throw new Error("Product ID is required");
+  }
+  try {
+    const response = await apiClient.delete(`products/${id}`);
+    return response.data;
+  } catch {
+    throw new Error(`Failed to delete product`);
+  }
+};
+
 //Categories
 export const fetchCategories = async () => {
-  // return axios.get("/categories").then((res) => res.data);
   try {
     const response = await apiClient.get("/categories");
     return response.data;
@@ -118,7 +127,6 @@ export const deleteCategory = async (id: number | undefined) => {
 
 //Subcategories
 export const fetchSubcategories = async () => {
-  // return apiClient.get("/subcategories").then((res) => res.data);
   try {
     const response = await apiClient.get("/subcategories");
     return response.data;
@@ -142,6 +150,15 @@ export const createSubcategory = async (data: { name: string; img: string }) => 
     return response.data;
   } catch {
     throw new Error("Failed to create subcategory");
+  }
+};
+
+export const updateSubcategory = async (data: { name: string; img: string }, id: number) => {
+  try {
+    const response = await apiClient.patch(`/subcategories/${id}`, data);
+    return response.data;
+  } catch {
+    throw new Error("Failed to update subcategory");
   }
 };
 

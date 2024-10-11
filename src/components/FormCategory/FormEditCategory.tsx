@@ -48,7 +48,9 @@ const FormEditCategory: FC<FormCategoryProps> = ({
   const onSubmit = async (data: { name: string; subCategoryId: number[] }) => {
     try {
       await updateCategory({ name: data.name, subCategoryId: data.subCategoryId }, categoryId);
-      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({
+        queryKey: ["categories", "subcategory", "subcategories", categoryId],
+      });
       onSuccess();
       onClose();
     } catch (error) {
