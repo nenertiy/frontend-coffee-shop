@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import plusIcon from "../../assets/img/plus.svg";
 
 import styles from "./ProductCard.module.scss";
+import { useAuthStore } from "../../store/authStore";
 
 interface ProductCardProps {
   name: string;
@@ -15,6 +16,8 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({ name, price, img, category, id, handleAddToCart }) => {
+  const isAuth = useAuthStore((state) => state.auth);
+
   return (
     <div className={styles.container}>
       <NavLink
@@ -30,14 +33,16 @@ const ProductCard: FC<ProductCardProps> = ({ name, price, img, category, id, han
       <div className={styles.container_price}>
         <div className={styles.price}>$ {price}</div>
         <div>
-          <button
-            className={styles.button}
-            onClick={handleAddToCart}>
-            <img
-              src={plusIcon}
-              alt=""
-            />
-          </button>
+          {isAuth && (
+            <button
+              className={styles.button}
+              onClick={handleAddToCart}>
+              <img
+                src={plusIcon}
+                alt=""
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>

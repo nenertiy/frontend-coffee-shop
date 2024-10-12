@@ -9,9 +9,10 @@ import { useAuthStore } from "../../store/authStore";
 const Cart: FC = () => {
   const userId = useAuthStore((state) => state.userId);
 
-  const { data, isSuccess } = useQuery({
+  const { data, isSuccess, refetch } = useQuery({
     queryKey: ["cart", userId],
     queryFn: () => fetchCart(userId),
+    staleTime: 0,
   });
 
   return (
@@ -33,6 +34,7 @@ const Cart: FC = () => {
                   quantity={product.quantity}
                   id={product.product.id}
                   userId={userId}
+                  refetch={refetch}
                 />
               )
             )

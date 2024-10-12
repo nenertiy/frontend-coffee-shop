@@ -216,3 +216,29 @@ export const fetchCart = async (userId: string | null) => {
     return response.data;
   }
 };
+
+export const removeFromCart = async (userId: string, productId: number) => {
+  try {
+    const response = await apiClient.delete("cart/remove", {
+      data: { userId, productId },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error removing from cart:", error);
+    throw error;
+  }
+};
+
+export const decreaseQuantity = async (userId: string, productId: number, quantity: number) => {
+  try {
+    const response = await apiClient.patch("cart/decrease", {
+      userId,
+      productId,
+      quantity,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating quantity:", error);
+    throw error;
+  }
+};

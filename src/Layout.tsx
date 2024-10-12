@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header/Header";
-import { useIsCartStore } from "./store/isCartStore";
 import CartFooter from "./components/CartFooter/CartFooter";
 import Modals from "./pages/Modals/Modals";
+import { useAuthStore } from "./store/authStore";
 
 const Layout: FC = () => {
-  const isCart = useIsCartStore((state) => state.isCart);
+  const isAuth = useAuthStore((state) => state.auth);
 
   return (
     <>
@@ -15,7 +15,7 @@ const Layout: FC = () => {
         <Outlet />
       </div>
       <Modals />
-      {isCart && <CartFooter />}
+      {isAuth && <CartFooter />}
     </>
   );
 };

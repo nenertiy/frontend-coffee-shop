@@ -91,6 +91,11 @@
 
   &_container {
     margin-top: 244px;
+
+    > p {
+      align-items: center;
+      text-align: center;
+    }
   }
 }
 

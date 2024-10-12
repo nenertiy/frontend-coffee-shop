@@ -18,6 +18,7 @@ const Product: FC = () => {
     queryFn: () => fetchProduct(id),
   });
 
+  const isAuth = useAuthStore((state) => state.auth);
   const userId = useAuthStore((state) => state.userId);
   const isAdmin = useAuthStore((state) => state.isAdmin);
 
@@ -67,11 +68,15 @@ const Product: FC = () => {
               <div className={styles.price}>$ {data.price}</div>
               {/* <div className={styles.size}>500ml</div> */}
               <div className={styles.button_container}>
-                <button
-                  className={styles.button}
-                  onClick={handleAddToCart}>
-                  Add to cart
-                </button>
+                {isAuth ? (
+                  <button
+                    className={styles.button}
+                    onClick={handleAddToCart}>
+                    Add to cart
+                  </button>
+                ) : (
+                  <p>Login to add to cart</p>
+                )}
               </div>
             </div>
           </>

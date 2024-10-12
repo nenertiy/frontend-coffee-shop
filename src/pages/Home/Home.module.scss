@@ -1,7 +1,7 @@
 .container {
   max-width: 1440px;
   margin-inline: auto;
-  // margin-bottom: 140px;
+  padding-bottom: 60px;
 
   &_title {
     width: 450px;
@@ -29,7 +29,7 @@
 
     &_bag {
       margin-top: 30px;
-      //   background: #5e381f;
+      // background: #5e381f;
       background: #935831;
       height: 666px;
       display: flex;
