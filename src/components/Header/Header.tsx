@@ -24,7 +24,7 @@ const Header: FC = () => {
 
   const handleLogout = () => {
     queryClient.invalidateQueries({ queryKey: ["cart", authStatus, userId] });
-    navigate("/menu");
+    navigate("/");
     logout();
   };
 
@@ -32,21 +32,15 @@ const Header: FC = () => {
     <div className={styles.header}>
       <div className={styles.container}>
         <div className={styles.nav}>
-          <NavLink
-            to="/"
-            className={styles.logo}>
+          <NavLink to="/" className={styles.logo}>
             <span>CA</span>
             <span>FE</span>
           </NavLink>
           <div className={styles.list}>
-            <NavLink
-              to="/menu"
-              className={styles.item}>
+            <NavLink to="/menu" className={styles.item}>
               Menu
             </NavLink>
-            <NavLink
-              to="/categories"
-              className={styles.item}>
+            <NavLink to="/categories" className={styles.item}>
               Category
             </NavLink>
           </div>
@@ -62,9 +56,7 @@ const Header: FC = () => {
                   handleProduct={() => productOpen()}
                 />
               )}
-              <button
-                className={styles.logout}
-                onClick={handleLogout}>
+              <button className={styles.logout} onClick={handleLogout}>
                 log out
               </button>
             </>
@@ -73,13 +65,15 @@ const Header: FC = () => {
               <NavLink
                 to="/registration"
                 // onClick={() => updateIsCart()}
-                className={styles.sign_up}>
+                className={styles.sign_up}
+              >
                 sing up
               </NavLink>
               <NavLink
                 // onClick={() => setAdmin(true)}
                 to="/login"
-                className={styles.sign_in}>
+                className={styles.sign_in}
+              >
                 sing in
               </NavLink>
             </>
