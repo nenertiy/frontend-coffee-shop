@@ -24,7 +24,9 @@ const CartFooter: FC = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.container}>
-        <div>Cart</div>
+        <NavLink to="/cart" className={styles.title}>
+          Cart
+        </NavLink>
         <div>
           <NavLink to="/cart" className={styles.cart}>
             <span className={styles.icon}></span>

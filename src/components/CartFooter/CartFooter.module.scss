@@ -20,6 +20,20 @@
   text-align: center;
 }
 
+.title {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: rgb(160, 255, 175);
+  }
+}
+
 .cart {
   position: relative !important;
   justify-content: center !important;
