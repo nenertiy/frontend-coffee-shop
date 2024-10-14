@@ -15,6 +15,14 @@ const Cart: FC = () => {
     staleTime: 0,
   });
 
+  let totalPrice: number = 0;
+
+  data?.cartProduct?.forEach(
+    (product: { quantity: number; product: { price: number } }) => {
+      totalPrice += product.quantity * product.product.price;
+    }
+  );
+
   return (
     <div className={styles.container}>
       <h2>Your order</h2>
@@ -23,7 +31,12 @@ const Cart: FC = () => {
           {isSuccess && data?.cartProduct?.length > 0 ? (
             data?.cartProduct.map(
               (product: {
-                product: { id: number; img: string; price: number; name: string };
+                product: {
+                  id: number;
+                  img: string;
+                  price: number;
+                  name: string;
+                };
                 quantity: number;
               }) => (
                 <CartCard
@@ -41,6 +54,13 @@ const Cart: FC = () => {
           ) : (
             <p>Your cart is empty.</p>
           )}
+        </div>
+        <div className={styles.line}></div>
+        <div className={styles.total_container}>
+          <div className={styles.total}>Total</div>
+          <div className={styles.total_price}>
+            ${Math.round(totalPrice * 10) / 10}
+          </div>
         </div>
       </div>
     </div>

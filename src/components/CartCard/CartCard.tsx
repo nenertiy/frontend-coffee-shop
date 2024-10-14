@@ -17,7 +17,15 @@ interface CartCardProps {
   refetch: () => void;
 }
 
-const CartCard: FC<CartCardProps> = ({ img, name, quantity, price, id, userId, refetch }) => {
+const CartCard: FC<CartCardProps> = ({
+  img,
+  name,
+  quantity,
+  price,
+  id,
+  userId,
+  refetch,
+}) => {
   const queryClient = useQueryClient();
 
   const handleDecrease = async () => {
@@ -46,34 +54,23 @@ const CartCard: FC<CartCardProps> = ({ img, name, quantity, price, id, userId, r
   return (
     <div className={styles.container}>
       <div className={styles.img}>
-        <img
-          src={img}
-          alt=""
-        />
+        <img src={img} alt="" />
       </div>
       <div className={styles.description}>
         <div className={styles.name}>{name}</div>
         <div className={styles.category}>{}</div>
         <div className={styles.count}>
-          <button
-            className={styles.button}
-            onClick={handleDecrease}>
-            <img
-              src={Minus}
-              alt=""
-            />
+          <button className={styles.button} onClick={handleDecrease}>
+            <img src={Minus} alt="" />
           </button>
           <div className={styles.count_product}>{quantity}</div>
-          <button
-            className={styles.button}
-            onClick={handleIncrease}>
-            <img
-              src={Plus}
-              alt=""
-            />
+          <button className={styles.button} onClick={handleIncrease}>
+            <img src={Plus} alt="" />
           </button>
         </div>
-        <div className={styles.price}>$ {price}</div>
+        <div className={styles.price}>
+          $ {Math.round(price * quantity * 10) / 10}
+        </div>
       </div>
     </div>
   );
