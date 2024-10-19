@@ -10,7 +10,11 @@ const apiClient = axios.create({
 });
 
 //User
-export const registration = async (data: { email: string; name: string; password: string }) => {
+export const registration = async (data: {
+  email: string;
+  name: string;
+  password: string;
+}) => {
   try {
     const response = await apiClient.post(`/auth/register`, data);
     return response.data;
@@ -111,7 +115,10 @@ export const fetchCategories = async () => {
   }
 };
 
-export const createCategory = async (data: { name: string; subCategoryId: number[] }) => {
+export const createCategory = async (data: {
+  name: string;
+  subCategoryId: number[];
+}) => {
   try {
     const response = await apiClient.post(`/categories`, data);
     return response.data;
@@ -163,7 +170,10 @@ export const fetchSubcategory = async (id: string | undefined) => {
   }
 };
 
-export const createSubcategory = async (data: { name: string; img: string }) => {
+export const createSubcategory = async (data: {
+  name: string;
+  img: string;
+}) => {
   try {
     const response = await apiClient.post(`/subcategories`, data);
     return response.data;
@@ -172,7 +182,10 @@ export const createSubcategory = async (data: { name: string; img: string }) => 
   }
 };
 
-export const updateSubcategory = async (data: { name: string; img: string }, id: number) => {
+export const updateSubcategory = async (
+  data: { name: string; img: string },
+  id: number
+) => {
   try {
     const response = await apiClient.patch(`/subcategories/${id}`, data);
     return response.data;
@@ -194,7 +207,11 @@ export const deleteSubcategory = async (id: string | undefined) => {
 };
 
 //Cart
-export const addToCart = async (userId: number, productId: number, quantity: number = 1) => {
+export const addToCart = async (
+  userId: number,
+  productId: number,
+  quantity: number = 1
+) => {
   try {
     const response = await apiClient.post(`cart/add`, {
       userId,
@@ -229,7 +246,11 @@ export const removeFromCart = async (userId: string, productId: number) => {
   }
 };
 
-export const decreaseQuantity = async (userId: string, productId: number, quantity: number) => {
+export const decreaseQuantity = async (
+  userId: string,
+  productId: number,
+  quantity: number
+) => {
   try {
     const response = await apiClient.patch("cart/decrease", {
       userId,
