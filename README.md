@@ -39,19 +39,13 @@ cd frontend-coffee-shop
 npm install
 ```
 
-### Step 3: Configure Environment Variables
-Create a `.env` file in the root of your project with the following variables:
-```bash
-API_URL=<backend-coffee-shop-api-url>
-```
-
-### Step 4: Start the Development Server
+### Step 3: Start the Development Server
 Run the application using Vite:
 ```bash
 npm run dev
 ```
 
-### Step 5: Build for Production
+### Step 4: Build for Production
 To build the application for production:
 ```bash
 npm run build
