@@ -28,32 +28,32 @@ This repository contains the frontend of a Coffee Shop application, built using 
 ## Setting Up the Project
 
 ### Step 1: Clone the Repository
-\`\`\`bash
+```bash
 git clone https://github.com/your-username/frontend-coffee-shop.git
-\`\`\`
+```
 
 ### Step 2: Install Dependencies
 Navigate to the project folder and install the required packages:
-\`\`\`bash
+```bash
 cd frontend-coffee-shop
 npm install
-\`\`\`
+```
 
 ### Step 3: Configure Environment Variables
-Create a \`.env\` file in the root of your project with the following variables:
-\`\`\`bash
+Create a `.env` file in the root of your project with the following variables:
+```bash
 API_URL=<backend-coffee-shop-api-url>
-\`\`\`
+```
 
 ### Step 4: Start the Development Server
 Run the application using Vite:
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 ### Step 5: Build for Production
 To build the application for production:
-\`\`\`bash
+```bash
 npm run build
-\`\`\`
+```
 
