@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Frontend Coffee Shop - Built with React, TypeScript, and Vite
 
-Currently, two official plugins are available:
+This repository contains the frontend of a Coffee Shop application, built using **React** with **TypeScript** for type safety, and leveraging several modern libraries for state management, form handling, routing, and data fetching. The frontend interacts with the **[Backend Coffee Shop API](https://github.com/nenertiy/backend-coffee-shop)**, providing a complete user experience for managing coffee products, placing orders, and interacting with customer data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features:
+- **React**: Declarative UI library for building user interfaces.
+- **TypeScript**: Ensures type safety and better development experience.
+- **Zustand**: Lightweight and flexible state management.
+- **TanStack React Query**: Powerful asynchronous state management and data fetching.
+- **Sass**: CSS preprocessor for cleaner and maintainable styles.
+- **React Hook Form**: Simplifies form handling and validation.
+- **React Router DOM**: Enables declarative routing in the application.
+- **TypeScript Cookie**: For managing browser cookies with type safety.
+- **Vite**: Fast and modern build tool for development and bundling.
 
-## Expanding the ESLint configuration
+## Tech Stack:
+- **React** - UI library
+- **TypeScript** - Typed JavaScript
+- **Zustand** - State management
+- **TanStack/React Query** - Data fetching and caching
+- **Sass** - Styling
+- **React Hook Form** - Form handling and validation
+- **React Router DOM** - Client-side routing
+- **TypeScript Cookie** - Managing cookies in TypeScript
+- **Vite** - Development tool for faster builds
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Setting Up the Project
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/your-username/frontend-coffee-shop.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Step 2: Install Dependencies
+Navigate to the project folder and install the required packages:
+```bash
+cd frontend-coffee-shop
+npm install
 ```
+
+### Step 3: Start the Development Server
+Run the application using Vite:
+```bash
+npm run dev
+```
+
+### Step 4: Build for Production
+To build the application for production:
+```bash
+npm run build
+```
+
