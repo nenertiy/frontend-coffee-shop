@@ -29,7 +29,7 @@ This repository contains the frontend of a Coffee Shop application, built using 
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/your-username/frontend-coffee-shop.git
+git clone https://github.com/nenertiy/frontend-coffee-shop.git
 ```
 
 ### Step 2: Install Dependencies
