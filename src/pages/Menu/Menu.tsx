@@ -11,7 +11,7 @@ const Menu: FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const userId = useAuthStore((state) => state.userId);
 
-  const { data } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ["products", searchValue],
     queryFn: () => fetchProducts(searchValue),
   });
@@ -39,25 +39,26 @@ const Menu: FC = () => {
         />
       </div>
       <div className={styles.list}>
-        {data?.map(
-          (product: {
-            id: string;
-            name: string;
-            img: string;
-            price: number;
-            productCategory: { name: string };
-          }) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              img={product.img}
-              price={product.price}
-              category={product?.productCategory?.name}
-              handleAddToCart={() => handleAddToCart(product.id)}
-            />
-          )
-        )}
+        {isSuccess &&
+          data?.map(
+            (product: {
+              id: string;
+              name: string;
+              img: string;
+              price: number;
+              productCategory: { name: string };
+            }) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                img={product.img}
+                price={product.price}
+                category={product?.productCategory?.name}
+                handleAddToCart={() => handleAddToCart(product.id)}
+              />
+            )
+          )}
       </div>
       <div className={styles.pagination}></div>
     </div>
