@@ -1,0 +1,23 @@
+.container {
+  box-sizing: border-box;
+  width: 282px;
+  height: 426px;
+  background: rgb(254, 254, 254);
+  border-radius: 28px;
+  padding: 16px 16px 24px;
+  display: flex;
+  color: black;
+  text-decoration: none;
+  flex-direction: column;
+  box-shadow: 0 2px 3px #00000012, 0 2px 3px #0000000f, 0 1px 3px #0000001a;
+  animation: skeleton-loading 2s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: rgba(221, 221, 221, 0.452);
+  }
+  100% {
+    background-color: rgb(254, 254, 254);
+  }
+}
