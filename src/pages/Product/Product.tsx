@@ -53,14 +53,13 @@ const Product: FC = () => {
         {isSuccess && (
           <>
             <div className={styles.img}>
-              <img
-                src={data.img}
-                alt={data.name}
-              />
+              <img src={data.img} alt={data.name} />
             </div>
             <div className={styles.container_description}>
               <div className={styles.title}>{data.name}</div>
-              <div className={styles.subtitle}>{data.productCategory?.name}</div>
+              <div className={styles.subtitle}>
+                {data.productCategory?.name}
+              </div>
               <div className={styles.description}>{data.description}</div>
             </div>
 
@@ -69,9 +68,7 @@ const Product: FC = () => {
               {/* <div className={styles.size}>500ml</div> */}
               <div className={styles.button_container}>
                 {isAuth ? (
-                  <button
-                    className={styles.button}
-                    onClick={handleAddToCart}>
+                  <button className={styles.button} onClick={handleAddToCart}>
                     Add to cart
                   </button>
                 ) : (
@@ -86,21 +83,18 @@ const Product: FC = () => {
         <div className={styles.buttons}>
           <button
             onClick={() => handleDelete(data.id)}
-            className={styles.delete}>
+            className={styles.delete}
+          >
             Delete
           </button>
-          <button
-            onClick={handleEditClick}
-            className={styles.edit}>
+          <button onClick={handleEditClick} className={styles.edit}>
             Edit
           </button>
         </div>
       )}
 
       {isEditing && (
-        <Modal
-          onClose={handleCloseModal}
-          isOpen={isEditing}>
+        <Modal onClose={handleCloseModal} isOpen={isEditing}>
           <FormEditProduct
             productId={id}
             currentProduct={data}

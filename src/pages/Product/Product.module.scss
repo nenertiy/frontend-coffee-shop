@@ -5,7 +5,7 @@
   display: flex;
   padding-top: 70px;
   justify-content: space-between;
-  padding-bottom: 90px;
+  // padding-bottom: 200px;
   //   gap: 36px;
 
   &_description {
@@ -107,6 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: end;
+  padding-bottom: 110px;
 
   > button {
     font-size: 18px;
