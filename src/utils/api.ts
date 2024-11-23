@@ -133,7 +133,7 @@ export const updateCategory = async (
   id: number
 ) => {
   try {
-    const response = await apiClient.patch(`/categories/${id}`, data);
+    const response = await apiClient.put(`/categories/${id}`, data);
     return response.data;
   } catch {
     throw new Error("Failed to update category");
